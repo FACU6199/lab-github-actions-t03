@@ -49,16 +49,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          dockerhub-push:
-          name: Push to Docker Hub
-          needs: build-and-test
-          if: github.ref == 'refs/heads/main'
-          uses: ./.github/workflows/reusable-build.yml
-          with:
-          image-name: gha-webapp-t03
-          secrets:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  dockerhub-push:
+    name: Push to Docker Hub
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      image-name: gha-webapp-t03
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   deploy-dev:
     name: Deploy → dev
